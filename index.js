@@ -37,6 +37,7 @@ setInterval(draw, 10);
 canvas.addEventListener("mousemove", mouseMouvement);
 
 function mouseMouvement(event){
-    console.log(event.pageX)
-    dirArrow = event.pageX;
+
+        dirArrow = event.pageX;
+
 }
