@@ -8,8 +8,8 @@ let y = 60;
 let startAngle = 10;
 let endAngle = 0;
 let anticlockwise = Math.PI*2;
-let speedX = 25;
-let speedY = 15; 
+let speedX = 0;
+let speedY = 5; 
 let go = false;
 
 //Mouse controls
@@ -50,17 +50,18 @@ function draw(){
     canvas.addEventListener("click", shoot);
     //shoot
     function shoot(event){
-        // if(dirArrowX===600){
-        //     speedX = 0;
-        // }
-        // if(dirArrowX>600){
+        if(dirArrowX===600){
+            speedX = 0;
+            speedY = 5;
+        }
+        if(dirArrowX>600){
         //     speedX = (dirArrowX - 600);
         //     console.log(speedX)
         // }
         // if(dirArrowX<600){
         //     speedX = (dirArrowX - 600);
             console.log(speedX, dirArrowX)
-        // }
+        }
         go = true
     }
     //Re-init ball
