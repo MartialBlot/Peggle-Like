@@ -10,7 +10,8 @@ let endAngle = 0;
 let anticlockwise = Math.PI*2;
 
 //Arrow option
-let dirArrow = 500;
+let dirArrowX = 500;
+let dirArrowY = 160;
 
 function draw(){
 
@@ -26,7 +27,7 @@ ctx.stroke();
 
 ctx.beginPath();
 ctx.moveTo(500, 60);
-ctx.lineTo(dirArrow, 160);
+ctx.lineTo(dirArrowX, dirArrowY);
 ctx.stroke();
 
 }
@@ -37,7 +38,5 @@ setInterval(draw, 10);
 canvas.addEventListener("mousemove", mouseMouvement);
 
 function mouseMouvement(event){
-
-        dirArrow = event.pageX;
-
+        dirArrowX = event.pageX;
 }
