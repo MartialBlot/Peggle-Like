@@ -9,9 +9,9 @@ let startAngle = 10;
 let endAngle = 0;
 let anticlockwise = Math.PI*2;
 
-//Arrow option
-let dirArrowX = 500;
-let dirArrowY = 160;
+//Arrow option with mouse -- not yet
+// let dirArrowX = 500;
+// let dirArrowY = 160;
 
 function draw(){
 
@@ -35,9 +35,8 @@ draw()
 
 setInterval(draw, 10);
 
-canvas.addEventListener("mousemove", mouseMouvement);
-
-function mouseMouvement(event){
-        console.log(dirArrowX, dirArrowY)
-        dirArrowX = event.pageX;
-}
+//Arrow option with mouse -- not yet
+//canvas.addEventListener("mousemove", mouseMouvement);
+//function mouseMouvement(event){
+//       dirArrowX = event.pageX;
+//}
