@@ -20,12 +20,12 @@ let nbBalls = 10;
 let balls = [];
 let ballsDead = [];
 
-function ball (x, y, size, color) {
+function ball (x, y, size, color, draw) {
     this.x = Math.floor(Math.random() * 1000) + 200;
     this.y = Math.floor(Math.random() * 420) + 100;
     this.size = 10;
     this.color = 'yellow';
-    
+    this.draw = true;
 }
 
 ball.prototype.drawE = function (){
@@ -157,6 +157,7 @@ function draw(){
         balls.push(Ball)
     }
     for (let i = 0; i < balls.length; i++) {
+        if(balls[i].draw){
         balls[i].drawE();
         //Collision ennemies
         if((y+10)>balls[i].y &&(y+10)<(balls[i].y+10) && (x+10)>balls[i].x && (x+10)<(balls[i].x+10) ||
@@ -167,10 +168,11 @@ function draw(){
             if(balls[i].color === 'yellow'){
             balls[i].color = "red";
             score += 500;
-            ballsDead.push(balls.indexOf(balls[i]))
+            ballsDead.push(balls[i])
             }
         }
     }
+}
 
     //draw shoot
     if(go){
@@ -186,9 +188,13 @@ function draw(){
     }
     if(y>=700){
 
-        for (let i = 0; i < ballsDead.length; i++) {
-            balls.splice(balls[i],1)            
+        for (let i = 0; i < balls.length; i++) {
+        for (let k = 0; k < ballsDead.length; k++) {
+            if(balls[i] === ballsDead[k]){
+                balls[i].draw = false;
+            }            
         }
+    }
         ballsDead = [];
 
         go = false;
