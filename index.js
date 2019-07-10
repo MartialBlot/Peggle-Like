@@ -12,8 +12,13 @@ let speedX;
 let speedY; 
 let go = false;
 
+//Bar Menu
+let score = 0;
+let nbBalls = 10; 
+
 //Ennemies balls
 let balls = [];
+let ballsDead = [];
 
 function ball (x, y, size, color) {
     this.x = Math.floor(Math.random() * 1000) + 200;
@@ -51,6 +56,9 @@ function mouseMouvement(event){
 //Shoot
 canvas.addEventListener("click", shoot);
 function shoot(event){
+
+    nbBalls--;
+
     refX = dirArrowX - 600;
     refY = dirArrowY - 60;
     console.log('no')
@@ -94,8 +102,14 @@ if(refX < 0){
     console.log(refX, refY)
 }
 
+//FPS
+let baseFps = new Date();
 
 function draw(){
+    //FPS
+    let refFps = new Date();
+    let fps = 1000 / (refFps - baseFps);
+    baseFps = refFps;
     
     ctx.clearRect(0, 0, 1200, 600)
     
@@ -125,6 +139,12 @@ function draw(){
     ctx.closePath();
     ctx.fill();
 
+    //menu bar
+    ctx.font = '22px serif';
+    ctx.fillText(`FPS : ${Math.round(fps)}`, 20, 30);
+    ctx.fillText(`Score : ${score}`, 110, 30);
+    ctx.fillText(`Balls : ${nbBalls}`, 280, 30);
+
     //Crazy box movements
     cB += speedBox;
     if(cB >= 1050 || cB <= 0){
@@ -132,7 +152,7 @@ function draw(){
     }
 
     //Balls Ennemies
-    while(balls.length < 15){
+    while(balls.length < 30){
         let Ball = new ball();
         balls.push(Ball)
     }
@@ -144,7 +164,11 @@ function draw(){
         (y)<(balls[i].y+10) && (y)>(balls[i].y) && (x+10)>balls[i].x && (x+10)<(balls[i].x+10) ||
         (y)<(balls[i].y+10) && (y)>(balls[i].y) && (x)<(balls[i].x+10) && (x)>(balls[i].x)){
             speedY = -speedY;
+            if(balls[i].color === 'yellow'){
             balls[i].color = "red";
+            score += 500;
+            ballsDead.push(balls.indexOf(balls[i]))
+            }
         }
     }
 
@@ -155,7 +179,18 @@ function draw(){
     }
     
     //Re-init ball
+    if(y>=700 && nbBalls === 0){
+        if(confirm(`Game Over - Your score : ${score} - Play gain ?`)){
+            document.location.reload(true);
+        } else { }
+    }
     if(y>=700){
+
+        for (let i = 0; i < ballsDead.length; i++) {
+            balls.splice(balls[i],1)            
+        }
+        ballsDead = [];
+
         go = false;
         x = 600
         y = 60
