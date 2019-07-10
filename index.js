@@ -58,6 +58,7 @@ let dirArrowY;
 let refX;
 let refY;
 let multi = 0.032;
+let rightToShoot = true;
 
 //Controls
 canvas.addEventListener("mousemove", mouseMouvement);
@@ -69,50 +70,44 @@ function mouseMouvement(event){
 //Shoot
 canvas.addEventListener("click", shoot);
 function shoot(event){
-
+    if(rightToShoot){
     nbBalls--;
 
     refX = dirArrowX - 600;
     refY = dirArrowY - 60;
-    console.log('no')
 
     if(refX === 0){
-        console.log('1')
         speedX = 0;
         speedY = 20;
     }
     if(refX === refY){
-        console.log('2')
         speedX = 20;
         speedY = 20;
     }
 
 if(refX > 0){
     if(refX > refY){
-        console.log('3pos')
         speedX = 20;
         speedY = refY * multi;
     }
     if(refX < refY){
-        console.log('4pos')
         speedX = refX * multi;
         speedY = 20;
     }
 }
 if(refX < 0){
     if(refX < -refY){
-        console.log('3neg')
         speedX = -20;
         speedY = refY * multi;
     }
     if(refX > -refY){
-        console.log('4neg')
         speedX = (refX * multi);
         speedY = 20;
     }
 }
-    go = true
-    console.log(refX, refY)
+    go = true;
+}
+rightToShoot = false;
 }
 
 //FPS
@@ -210,12 +205,7 @@ function draw(){
         } else { };
     }
 
-    if(nbBalls === 1){
-        showLastChance = true;
-    }
-
     if(y>=700){
-
         for (let i = 0; i < balls.length; i++) {
         for (let k = 0; k < ballsDead.length; k++) {
             if(balls[i] === ballsDead[k]){
@@ -225,10 +215,14 @@ function draw(){
         }
     }
         ballsDead = [];
-
         go = false;
         x = 600
         y = 60
+        rightToShoot= true; 
+
+        if(nbBalls === 1){
+            showLastChance = true;
+        }
     }
 
     //Collision walls
@@ -253,6 +247,7 @@ function draw(){
                 }            
             }
     }
+    rightToShoot= true; 
 }
     window.requestAnimationFrame(draw);
 }
