@@ -15,15 +15,16 @@ let go = false;
 //Bar Menu
 let score = 0;
 let nbBalls = 10; 
+let showLastChance = false;
 
 //Ennemies balls
 let balls = [];
 let ballsDead = [];
 let ballsDelete = 0 ;
-let nbEnnemies = 1;
+let nbEnnemies = 50;
 
 function ball (x, y, size, color, draw) {
-    this.x = Math.floor(Math.random() * 1000) + 200;
+    this.x = Math.floor(Math.random() * 900) + 150;
     this.y = Math.floor(Math.random() * 420) + 100;
     this.size = 10;
     this.color = 'yellow';
@@ -39,6 +40,16 @@ ball.prototype.drawE = function (){
 //Crazy box
 let speedBox = 5;
 let cB = 600;
+let colorBox = 'orange';
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+    }
 
 //Mouse controls
 let dirArrowX;
@@ -130,7 +141,7 @@ function draw(){
     ctx.stroke();
     //Crazy box
     ctx.beginPath();
-    ctx.fillStyle = 'orange';
+    ctx.fillStyle = colorBox;
     ctx.rect(cB, 580, 150, 20);
     ctx.closePath();
     ctx.fill();
@@ -146,6 +157,9 @@ function draw(){
     ctx.fillText(`FPS : ${Math.round(fps)}`, 20, 30);
     ctx.fillText(`Score : ${score}`, 110, 30);
     ctx.fillText(`Balls : ${nbBalls}`, 280, 30);
+    if(showLastChance){
+    ctx.fillText(`It's your last chance !!!!!!!!`, 950, 30);
+    }
 
     //Crazy box movements
     cB += speedBox;
@@ -193,7 +207,11 @@ function draw(){
         if(confirm(`!!! Win !!!!- Your score : ${score} - Play gain ?`)){
             document.location.reload(true);
             return;
-        } else { }
+        } else { };
+    }
+
+    if(nbBalls === 1){
+        showLastChance = true;
     }
 
     if(y>=700){
@@ -222,9 +240,23 @@ function draw(){
     }
     //Collision with Box
     if((y+10) >= 580 && x >= cB && x <= (cB + 150)){
-        speedY = -speedY;
+        nbBalls ++;
+        x = 600
+        y = 60
+        go = false;
+        colorBox = getRandomColor()
+        for (let i = 0; i < balls.length; i++) {
+            for (let k = 0; k < ballsDead.length; k++) {
+                if(balls[i] === ballsDead[k]){
+                    balls[i].draw = false;
+                    ballsDelete += 1;
+                }            
+            }
     }
+}
     window.requestAnimationFrame(draw);
 }
 
 draw()
+
+
