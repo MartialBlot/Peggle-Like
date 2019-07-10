@@ -255,3 +255,5 @@ function draw(){
 draw()
 
 
+// +1  si balle sauvéeif(ballsDelete === nbEnnemies){
+        // if(confirm(`!!! Win ----- BUG E LA GAGNE
