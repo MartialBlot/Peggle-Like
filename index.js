@@ -19,6 +19,8 @@ let nbBalls = 10;
 //Ennemies balls
 let balls = [];
 let ballsDead = [];
+let ballsDelete = 0 ;
+let nbEnnemies = 1;
 
 function ball (x, y, size, color, draw) {
     this.x = Math.floor(Math.random() * 1000) + 200;
@@ -152,7 +154,7 @@ function draw(){
     }
 
     //Balls Ennemies
-    while(balls.length < 30){
+    while(balls.length < nbEnnemies){
         let Ball = new ball();
         balls.push(Ball)
     }
@@ -186,12 +188,21 @@ function draw(){
             document.location.reload(true);
         } else { }
     }
+
+    if(ballsDelete === nbEnnemies){
+        if(confirm(`!!! Win !!!!- Your score : ${score} - Play gain ?`)){
+            document.location.reload(true);
+            return;
+        } else { }
+    }
+
     if(y>=700){
 
         for (let i = 0; i < balls.length; i++) {
         for (let k = 0; k < ballsDead.length; k++) {
             if(balls[i] === ballsDead[k]){
                 balls[i].draw = false;
+                ballsDelete += 1;
             }            
         }
     }
