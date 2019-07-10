@@ -138,6 +138,14 @@ function draw(){
     }
     for (let i = 0; i < balls.length; i++) {
         balls[i].drawE();
+        //Collision ennemies
+        if((y+10)>balls[i].y &&(y+10)<(balls[i].y+10) && (x+10)>balls[i].x && (x+10)<(balls[i].x+10) ||
+        (y+10)>balls[i].y &&(y+10)<(balls[i].y+10) && (x)<(balls[i].x+10) && (x)>(balls[i].x) ||
+        (y)<(balls[i].y+10) && (y)>(balls[i].y) && (x+10)>balls[i].x && (x+10)<(balls[i].x+10) ||
+        (y)<(balls[i].y+10) && (y)>(balls[i].y) && (x)<(balls[i].x+10) && (x)>(balls[i].x)){
+            speedY = -speedY;
+            balls[i].color = "red";
+        }
     }
 
     //draw shoot
