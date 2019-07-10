@@ -8,14 +8,17 @@ let y = 60;
 let startAngle = 10;
 let endAngle = 0;
 let anticlockwise = Math.PI*2;
-let speedX = 0;
-let speedY = 5; 
+let speedX;
+let speedY; 
 let go = false;
 
 //Mouse controls
-let dirArrowX = 600;
-let dirArrowY = 100;
-let refShooter = 600;
+let dirArrowX;
+let dirArrowY;
+
+let refX;
+let refY;
+let multi = 0.0084;
 
 function draw(){
     
@@ -50,19 +53,49 @@ function draw(){
     canvas.addEventListener("click", shoot);
     //shoot
     function shoot(event){
-        if(dirArrowX===600){
+        refX = dirArrowX - 600;
+        refY = dirArrowY - 60
+        console.log('no')
+
+        if(refX === 0){
+            console.log('1')
             speedX = 0;
             speedY = 5;
         }
-        if(dirArrowX>600){
-        //     speedX = (dirArrowX - 600);
-        //     console.log(speedX)
-        // }
-        // if(dirArrowX<600){
-        //     speedX = (dirArrowX - 600);
-            console.log(speedX, dirArrowX)
+        if(refX === refY){
+            console.log('2')
+            speedX = 5;
+            speedY = 5;
         }
+
+        if(refX > 0){
+        if(refX > refY){
+            console.log('3')
+            speedX = 5;
+            speedY = refY * multi;
+        }
+        if(refX < refY){
+            console.log('4')
+            speedX = refX * multi;
+            speedY = 5;
+        }
+    }
+    if(refX < 0){
+        if(refX < refY){
+            console.log('3')
+            speedX = -5;
+            speedY = refY * multi;
+        }
+        if(refX > (-refY)){
+            console.log('4')
+            speedX = (refX * multi);
+            speedY = 5;
+        }
+    }
         go = true
+    //     console.log(refX, refY)
+    // console.log(dirArrowX, dirArrowY)
+
     }
     //Re-init ball
     if(y>=900){
@@ -70,6 +103,7 @@ function draw(){
         x = 600
         y = 60
     }
+    // console.log(dirArrowX, dirArrowY)
 
     window.requestAnimationFrame(draw);
 }
