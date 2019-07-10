@@ -12,6 +12,26 @@ let speedX;
 let speedY; 
 let go = false;
 
+//Ennemies balls
+let balls = [];
+
+function ball (x, y, size, color) {
+    this.x = Math.floor(Math.random() * 1000) + 200;
+    this.y = Math.floor(Math.random() * 420) + 100;
+    this.size = 10;
+    this.color = 'yellow';
+    
+}
+
+ball.prototype.drawE = function (){
+    ctx.beginPath();
+    ctx.fillStyle = this.color;
+    ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+    ctx.fill();
+}
+//Crazy box
+let speedBox = 5;
+let cB = 600;
 
 //Mouse controls
 let dirArrowX;
@@ -92,12 +112,33 @@ function draw(){
     ctx.lineTo(dirArrowX, dirArrowY);
     ctx.closePath();
     ctx.stroke();
+    //Crazy box
+    ctx.beginPath();
+    ctx.fillStyle = 'orange';
+    ctx.rect(cB, 580, 150, 20);
+    ctx.closePath();
+    ctx.fill();
     //Ball
     ctx.beginPath();
-    ctx.fillStyle = 'blue';
+    ctx.fillStyle = 'white';
     ctx.arc(x, y, startAngle, endAngle, anticlockwise);
     ctx.closePath();
     ctx.fill();
+
+    //Crazy box movements
+    cB += speedBox;
+    if(cB >= 1050 || cB <= 0){
+        speedBox = - speedBox;
+    }
+
+    //Balls Ennemies
+    while(balls.length < 15){
+        let Ball = new ball();
+        balls.push(Ball)
+    }
+    for (let i = 0; i < balls.length; i++) {
+        balls[i].drawE();
+    }
 
     //draw shoot
     if(go){
@@ -119,8 +160,10 @@ function draw(){
     if(y <= 0){
         speedY = -speedY;
     }
-    // console.log(dirArrowX, dirArrowY)
-
+    //Collision with Box
+    if((y+10) >= 580 && x >= cB && x <= (cB + 150)){
+        speedY = -speedY;
+    }
     window.requestAnimationFrame(draw);
 }
 
