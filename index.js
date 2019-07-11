@@ -253,3 +253,7 @@ function draw(){
 }
 
 draw()
+
+//----------------BUGs----------------------------
+//Fix collision, problems with some angles
+//Fix shooter precison is really drunk
