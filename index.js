@@ -180,6 +180,8 @@ function draw(){
             balls[i].color = "red";
             score += 500;
             ballsDead.push(balls[i])
+            ballsDelete += 1;
+            console.log(ballsDelete);
             }
         }
     }
@@ -210,7 +212,6 @@ function draw(){
         for (let k = 0; k < ballsDead.length; k++) {
             if(balls[i] === ballsDead[k]){
                 balls[i].draw = false;
-                ballsDelete += 1;
             }            
         }
     }
@@ -243,7 +244,6 @@ function draw(){
             for (let k = 0; k < ballsDead.length; k++) {
                 if(balls[i] === ballsDead[k]){
                     balls[i].draw = false;
-                    ballsDelete += 1;
                 }            
             }
     }
@@ -253,7 +253,3 @@ function draw(){
 }
 
 draw()
-
-
-// +1  si balle sauvéeif(ballsDelete === nbEnnemies){
-        // if(confirm(`!!! Win ----- BUG E LA GAGNE
