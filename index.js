@@ -21,7 +21,7 @@ let showLastChance = false;
 let balls = [];
 let ballsDead = [];
 let ballsDelete = 0 ;
-let nbEnnemies = 50;
+let nbEnnemies = 30;
 
 function ball (x, y, size, color, draw) {
     this.x = Math.floor(Math.random() * 900) + 150;
@@ -75,34 +75,35 @@ function shoot(event){
 
     refX = dirArrowX - 600;
     refY = dirArrowY - 60;
+    console.log(refX, refY)
 
     if(refX === 0){
         speedX = 0;
-        speedY = 20;
+        speedY = 15;
     }
     if(refX === refY){
-        speedX = 20;
-        speedY = 20;
+        speedX = 15;
+        speedY = 15;
     }
 
 if(refX > 0){
     if(refX > refY){
-        speedX = 20;
-        speedY = refY * multi;
+        speedX = refX / 15;
+        speedY = refY / 15;
     }
     if(refX < refY){
-        speedX = refX * multi;
-        speedY = 20;
+        speedX = refX / 15;
+        speedY = refY / 15;
     }
 }
 if(refX < 0){
     if(refX < -refY){
-        speedX = -20;
-        speedY = refY * multi;
+        speedX = refX / 15;
+        speedY = refY / 15;
     }
     if(refX > -refY){
-        speedX = (refX * multi);
-        speedY = 20;
+        speedX = refX / 15;
+        speedY = refY / 15;
     }
 }
     go = true;
@@ -181,7 +182,6 @@ function draw(){
             score += 500;
             ballsDead.push(balls[i])
             ballsDelete += 1;
-            console.log(ballsDelete);
             }
         }
     }
