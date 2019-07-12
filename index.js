@@ -22,11 +22,11 @@ let showLastChance = false;
 let balls = [];
 let ballsDead = [];
 let ballsDelete = 0 ;
-let nbEnnemies = 30;
+let nbEnnemies = 127;
 
 function ball (x, y, size, color, draw) {
-    this.x = Math.floor(Math.random() * 900) + 150;
-    this.y = Math.floor(Math.random() * 420) + 100;
+    this.x = 150; //Math.floor(Math.random() * 900) + 150;
+    this.y = 200;//Math.floor(Math.random() * 420) + 100;
     this.size = 10;
     this.color = 'yellow';
     this.draw = true;
@@ -125,13 +125,13 @@ function draw(){
     
     //Bloc shooter
     ctx.beginPath();
-    ctx.strokeStyle = 'red';
+    ctx.strokeStyle = colorBox;
     ctx.arc(600, 0, 60, 0, anticlockwise);
     ctx.closePath();
     ctx.stroke();
     //shooter line
     ctx.beginPath();
-    ctx.strokeStyle = 'red';
+    ctx.strokeStyle = colorBox;
     ctx.moveTo(600, 60);
     ctx.lineTo(dirArrowX, dirArrowY);
     ctx.closePath();
@@ -166,6 +166,70 @@ function draw(){
 
     //Balls Ennemies
     while(balls.length < nbEnnemies){
+        let space = 40;
+        for (let i = 0; i < 22; i++) {
+            let Ball = new ball();
+            balls.push(Ball)
+            Ball.x += space;
+            space+=40;
+        }
+        space = 40;
+        for (let i = 0; i < 21; i++) {
+            let Ball = new ball();
+            balls.push(Ball)
+            Ball.y += 40;
+            Ball.x += space;
+            space+=40;
+        }
+        space = 80;
+        for (let i = 0; i < 19; i++) {
+            let Ball = new ball();
+            balls.push(Ball)
+            Ball.y += 80;
+            Ball.x += space;
+            space+=40;
+        }
+        space = 120;
+        for (let i = 0; i < 17; i++) {
+            let Ball = new ball();
+            balls.push(Ball)
+            Ball.y += 120;
+            Ball.x += space;
+            space+=40;
+        }
+        space = 160;
+        for (let i = 0; i < 15; i++) {
+            let Ball = new ball();
+            balls.push(Ball)
+            Ball.y += 160;
+            Ball.x += space;
+            space+=40;
+        }
+        space = 200;
+        for (let i = 0; i < 13; i++) {
+            let Ball = new ball();
+            balls.push(Ball)
+            Ball.y += 200;
+            Ball.x += space;
+            space+=40;
+        }
+        space = 240;
+        for (let i = 0; i < 11; i++) {
+            let Ball = new ball();
+            balls.push(Ball)
+            Ball.y += 240;
+            Ball.x += space;
+            space+=40;
+        }
+        space = 280;
+        for (let i = 0; i < 9; i++) {
+            let Ball = new ball();
+            balls.push(Ball)
+            Ball.y += 280;
+            Ball.x += space;
+            space+=40;
+        }
+        
         let Ball = new ball();
         balls.push(Ball)
     }
