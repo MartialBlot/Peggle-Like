@@ -26,7 +26,7 @@ let nbEnnemies = 127;
 
 function ball (x, y, size, color, draw) {
     this.x = 150; //Math.floor(Math.random() * 900) + 150;
-    this.y = 200;//Math.floor(Math.random() * 420) + 100;
+    this.y = 250;//Math.floor(Math.random() * 420) + 100;
     this.size = 10;
     this.color = 'yellow';
     this.draw = true;
@@ -64,8 +64,12 @@ let rightToShoot = true;
 //Controls
 canvas.addEventListener("mousemove", mouseMouvement);
 function mouseMouvement(event){
+    if(event.pageX>400 && event.pageX<800){
     dirArrowX = event.pageX;
+    }
+    if(event.pageY>60 && event.pageY<210){
     dirArrowY = event.pageY;
+    }
 }
 
 //Shoot
@@ -80,31 +84,31 @@ function shoot(event){
 
     if(refX === 0){
         speedX = 0;
-        speedY = 15;
+        speedY = 12;
     }
     if(refX === refY){
-        speedX = 15;
-        speedY = 15;
+        speedX = 12;
+        speedY = 12;
     }
 
 if(refX > 0){
     if(refX > refY){
-        speedX = refX / 15;
-        speedY = refY / 15;
+        speedX = refX / 12;
+        speedY = refY / 12;
     }
     if(refX < refY){
-        speedX = refX / 15;
-        speedY = refY / 15;
+        speedX = refX / 12;
+        speedY = refY / 12;
     }
 }
 if(refX < 0){
     if(refX < -refY){
-        speedX = refX / 15;
-        speedY = refY / 15;
+        speedX = refX / 12;
+        speedY = refY / 12;
     }
     if(refX > -refY){
-        speedX = refX / 15;
-        speedY = refY / 15;
+        speedX = refX / 12;
+        speedY = refY / 12;
     }
 }
     go = true;
@@ -116,6 +120,7 @@ rightToShoot = false;
 let baseFps = new Date();
 
 function draw(){
+    console.log(dirArrowX, dirArrowY)
     //FPS
     let refFps = new Date();
     let fps = 1000 / (refFps - baseFps);
@@ -298,10 +303,10 @@ function draw(){
     }
 
     //Collision walls
-    if(x >= 1200 || x <= 0){
+    if(x >= 1200 || x <= 0 ){
         speedX = -speedX;
     }
-    if(y <= 0){
+    if(y < 0 ){
         speedY = -speedY;
     }
     //Collision with Box
