@@ -5,7 +5,7 @@ let ctx = canvas.getContext('2d');
 //Ball options
 let x = 600;
 let y = 60;
-let startAngle = 10;
+let startAngle = 12;
 let endAngle = 0;
 let anticlockwise = Math.PI*2;
 let speedX;
@@ -242,10 +242,10 @@ function draw(){
         if(balls[i].draw){
         balls[i].drawE();
         //Collision ennemies
-        if((y+10)>balls[i].y &&(y+10)<(balls[i].y+10) && (x+10)>balls[i].x && (x+10)<(balls[i].x+10) ||
-        (y+10)>balls[i].y &&(y+10)<(balls[i].y+10) && (x)<(balls[i].x+10) && (x)>(balls[i].x) ||
-        (y)<(balls[i].y+10) && (y)>(balls[i].y) && (x+10)>balls[i].x && (x+10)<(balls[i].x+10) ||
-        (y)<(balls[i].y+10) && (y)>(balls[i].y) && (x)<(balls[i].x+10) && (x)>(balls[i].x)){
+        if((y+startAngle)>balls[i].y &&(y+startAngle)<(balls[i].y+startAngle) && (x+startAngle)>balls[i].x && (x+startAngle)<(balls[i].x+startAngle) ||
+        (y+startAngle)>balls[i].y &&(y+startAngle)<(balls[i].y+startAngle) && (x)<(balls[i].x+startAngle) && (x)>(balls[i].x) ||
+        (y)<(balls[i].y+startAngle) && (y)>(balls[i].y) && (x+startAngle)>balls[i].x && (x+startAngle)<(balls[i].x+startAngle) ||
+        (y)<(balls[i].y+startAngle) && (y)>(balls[i].y) && (x)<(balls[i].x+startAngle) && (x)>(balls[i].x)){
             speedY = -speedY;
             if(balls[i].color === 'yellow'){
             balls[i].color = "red";
@@ -306,7 +306,7 @@ function draw(){
     if(x >= 1200 || x <= 0 ){
         speedX = -speedX;
     }
-    if(y < 0 ){
+    if(Math.round(y) < 0 ){
         speedY = -speedY;
     }
     //Collision with Box
