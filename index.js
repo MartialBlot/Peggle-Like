@@ -11,6 +11,7 @@ let anticlockwise = Math.PI*2;
 let speedX;
 let speedY; 
 let go = false;
+let rebond = false;
 
 //Bar Menu
 let score = 0;
@@ -180,8 +181,9 @@ function draw(){
             if(balls[i].color === 'yellow'){
             balls[i].color = "red";
             score += 500;
-            ballsDead.push(balls[i])
+            ballsDead.push(balls[i]);
             ballsDelete += 1;
+            rebond = true;
             }
         }
     }
@@ -191,6 +193,10 @@ function draw(){
     if(go){
         x += speedX;
         y += speedY;
+        if(rebond){
+            speedY *= .999;
+            speedY += .25;
+        }
     }
     
     //Re-init ball
@@ -208,6 +214,7 @@ function draw(){
     }
 
     if(y>=700){
+        rebond = false;
         for (let i = 0; i < balls.length; i++) {
         for (let k = 0; k < ballsDead.length; k++) {
             if(balls[i] === ballsDead[k]){
@@ -235,6 +242,7 @@ function draw(){
     }
     //Collision with Box
     if((y+10) >= 580 && x >= cB && x <= (cB + 150)){
+        rebond = false;
         nbBalls ++;
         x = 600
         y = 60
